@@ -1,0 +1,66 @@
+.container_header {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    background: #101010;
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    align-items: center;
+}
+
+.container_header--logo {
+    width: 100px;
+    padding-left: 20px;
+}
+
+.container_header .container_header--menu {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.container_header .container_header--menu li {
+    width: 95px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    transform: .3s;
+    cursor: pointer;
+}
+
+.container_header .container_header--menu li:hover {
+    background: #2d2d2d;
+}
+
+.ant-input {
+    display: none !important;
+
+}
+
+.ant-btn,
+.anticon-shopping-cart {
+    position: absolute;
+    right: 20px;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2f3033;
+}
+
+.anticon-shopping-cart {
+    color: #fff;
+}
+
+.ant-form {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 50px;
+    top: 10px;
+}

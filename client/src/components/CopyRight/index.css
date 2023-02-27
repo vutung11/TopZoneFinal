@@ -1,0 +1,28 @@
+.container_copyright--bg {
+    background: #3d3d3d;
+    padding: 10px 0;
+}
+
+.container_copyright {
+    width: 1300px;
+    margin: 0 auto;
+}
+
+.container_copyright p {
+    text-align: center;
+    color: #757575;
+    font-size: 14px;
+}
+
+.container_copyright--box {
+    display: flex;
+    gap: 10px;
+}
+
+.container_copyright--box img {
+    width: 150px;
+    height: 40px;
+    background-size: cover;
+    object-fit: cover;
+    cursor: pointer;
+}

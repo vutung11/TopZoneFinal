@@ -1,0 +1,30 @@
+.container_bg {
+    width: 100%;
+    background: #323232;
+}
+
+.container_policy {
+    width: 1200px;
+    min-width: 1024px;
+    margin: 0 auto;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 20px;
+    background: #323232;
+}
+
+.container_policy--box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 250px;
+    color: #fff;
+}
+
+.anticon-right-circle {
+    font-size: 35px;
+}

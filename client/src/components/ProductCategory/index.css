@@ -1,0 +1,8 @@
+.productcategory_container .container_productcard-title {
+    background: #3e3e3f;
+}
+
+.productcategory_container .container_productcard-title h2 {
+    margin: 0;
+    padding-bottom: 30px;
+}
