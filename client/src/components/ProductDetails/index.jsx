@@ -15,7 +15,6 @@ const ProductDetails = () => {
   useEffect(() => {
     dispatch(getIphoneById(id))
   }, [])
-  console.log(oneiphone, loading, 'load')
 
   return (<React.Fragment>
     {

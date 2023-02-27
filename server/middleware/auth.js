@@ -6,7 +6,6 @@ const auth = async (req, res, next) => {
     const data = jwt.verify(token, "New")
     try {
         const user = await UserModel.findOne({ id: data._id, 'tokens.token': token })
-        console.log(user)
         if (!user) {
             throw new Error()
         }

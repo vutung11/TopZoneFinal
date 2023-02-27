@@ -1,5 +1,5 @@
 import { register, login } from './user.js'
-import { createProduct, getAllProduct } from './product.js'
+import { createProduct, getAllProduct, getProductBySlug, updateProduct, deleteProduct } from './product.js'
 
 export const userController = {
     register,
@@ -7,5 +7,8 @@ export const userController = {
 }
 export const productController = {
     createProduct,
-    getAllProduct
+    getAllProduct,
+    getProductBySlug,
+    updateProduct,
+    deleteProduct
 }

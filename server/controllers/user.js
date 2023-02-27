@@ -25,12 +25,10 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     const { email, password } = req.body
     let exitUser = await UserModel.findOne({ email }).exec()
-    console.log(exitUser)
     if (exitUser) {
 
         let isMatch = await bcrypt.compare(password, exitUser.password)
         if (!!isMatch) {
-            console.log('match')
             let token = jwt.sign({
                 data: exitUser
             },
