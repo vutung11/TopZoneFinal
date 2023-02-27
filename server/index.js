@@ -1,21 +1,20 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import * as dotenv from 'dotenv'
 import cors from 'cors'
 import routerUser from './routes/user.js'
 import routerProduct from './routes/product.js'
+import dbConnect from './config/dbconnect.js'
 
 const app = express()
+dotenv.config()
 
-mongoose.set('strictQuery', true)
-const MongoURI = 'mongodb+srv://admin:admin@cluster0.eakbrtf.mongodb.net/?retryWrites=true&w=majority'
 
-await mongoose.connect(MongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log('Connect mongoose successfullt'))
-    .catch(error => console.log(error))
+
+dbConnect()
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
     res.send('Test')
