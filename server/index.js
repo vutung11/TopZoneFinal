@@ -1,7 +1,7 @@
 import express from 'express'
-import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import routerUser from './routes/user.js'
 import routerProduct from './routes/product.js'
 import dbConnect from './config/dbconnect.js'
@@ -15,6 +15,7 @@ dbConnect()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
     res.send('Test')

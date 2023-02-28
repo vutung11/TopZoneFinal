@@ -1,9 +1,10 @@
 import slugify from "slugify"
 import { MAX_RECORDS } from "../global/constant.js"
 import ProductModel from "../models/Product.js"
+import asyncHandler from 'express-async-handler'
 
 
-const createProduct = async (req, res) => {
+const createProduct = asyncHandler(async (req, res) => {
     const { title, slug, description, photos, price, pricePromo, discount, category } = req.body
     const slugTitle = slugify(title, {
         replacement: '-',
@@ -29,9 +30,9 @@ const createProduct = async (req, res) => {
         message: 'Create Product Successfully',
         product: product
     })
-}
+})
 
-const getAllProduct = async (req, res) => {
+const getAllProduct = asyncHandler(async (req, res) => {
 
     let { page = 1, size = MAX_RECORDS, searchString = '' } = req.query
 
@@ -46,9 +47,9 @@ const getAllProduct = async (req, res) => {
         size: products.length,
         data: products
     })
-}
+})
 
-const getProductBySlug = async (req, res) => {
+const getProductBySlug = asyncHandler(async (req, res) => {
     const { slug } = req.params
     const product = await ProductModel.findOne({ slug })
 
@@ -56,9 +57,9 @@ const getProductBySlug = async (req, res) => {
         message: ' Get product by slug successfully',
         data: product
     })
-}
+})
 
-const updateProduct = async (req, res) => {
+const updateProduct = asyncHandler(async (req, res) => {
     const { _id, title, slug, description, photos, price, pricePromo, discount, category } = req.body
 
     const product = await ProductModel.findById({ _id })
@@ -95,9 +96,9 @@ const updateProduct = async (req, res) => {
         data: product
     })
 
-}
+})
 
-const deleteProduct = async (req, res) => {
+const deleteProduct = asyncHandler(async (req, res) => {
     try {
         const result = await ProductModel.deleteOne({ _id: req.params })
         res.status(200).json({
@@ -110,7 +111,7 @@ const deleteProduct = async (req, res) => {
     }
 
 
-}
+})
 
 
 export {

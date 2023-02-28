@@ -1,10 +1,11 @@
 import UserModel from "../models/User.js"
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
+import asyncHandler from 'express-async-handler'
 
-const register = async (req, res) => {
-    const { name, email, password } = req.body
-    const exitUser = await UserModel.findOne({ email }).exec()
+const register = asyncHandler(async (req, res) => {
+    const { firstName, mobile, lastName, email, password } = req.body
+    const exitUser = await UserModel.findOne({ email, mobile }).exec()
 
     if (!!exitUser) {
         throw new 'User da ton tai'
@@ -12,7 +13,7 @@ const register = async (req, res) => {
     const hasPassword = await bcrypt.hash(password, parseInt('hello'))
 
     let user = new UserModel({
-        name, email, password: hasPassword
+        firstName, mobile, lastName, email, password: hasPassword
     })
     user.save()
 
@@ -21,7 +22,8 @@ const register = async (req, res) => {
         password: 'Not Show'
     })
 
-}
+})
+
 const login = async (req, res) => {
     const { email, password } = req.body
     let exitUser = await UserModel.findOne({ email }).exec()
@@ -32,9 +34,17 @@ const login = async (req, res) => {
             let token = jwt.sign({
                 data: exitUser
             },
-                "New",
+                process.env.JWT_SERECT,
                 { expiresIn: '10day' }
             )
+            let refreshToken = jwt.sign({
+                data: exitUser
+            },
+                "Hi",
+                { expiresIn: '12day' }
+            )
+            await UserModel.findByIdAndUpdate(exitUser._id, { refreshToken }, { new: true })
+            res.cookie('refreshToken', refreshToken, { httpOnly: true, maxAge: 12 * 24 * 60 * 60 * 1000 })
             res.status(201).json({
                 ...exitUser.toObject(),
                 password: 'Not Show',

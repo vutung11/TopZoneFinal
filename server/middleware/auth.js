@@ -3,7 +3,7 @@ import UserModel from '../models/User.js'
 
 const auth = async (req, res, next) => {
     const token = req.header('Authorization').replace('Bearer ', '')
-    const data = jwt.verify(token, "New")
+    const data = jwt.verify(token, process.env.JWT_SERECT)
     try {
         const user = await UserModel.findOne({ id: data._id, 'tokens.token': token })
         if (!user) {
