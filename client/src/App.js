@@ -22,10 +22,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
-          <Route path='/:slug' element={<ProductDetails />} />
-          {/* <Route path='/:category/:id' element={<ProductDetails />} /> */}
-          {/* <Route path='/:category' element={<ProductCategory />} /> */}
-          {/* <Route path='/:users' element={<Users />} /> */}
+          <Route path='/:header/:slug' element={<ProductDetails />} />
+          <Route path='/:title' element={<ProductCategory />} />
           <Route path='*' element={<Page404 />} />
         </Routes>
       </BrowserRouter>

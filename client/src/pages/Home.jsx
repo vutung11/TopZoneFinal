@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,7 +5,6 @@ import axiosClient from '../api/axiosClient'
 import Category from '../components/Category'
 import CopyRight from '../components/CopyRight'
 import Footer from '../components/Footer'
-import Header from '../components/Header'
 import Policy from '../components/Policy'
 import ProductCard from '../components/ProductCard'
 import Slider from '../components/Slider'
@@ -27,21 +25,21 @@ const Home = () => {
         response.data.forEach(item => {
 
           if (item.title === 'Macbook') {
-            dispatch(GetAllMacbook(item._id))
+            dispatch(GetAllMacbook(item.title))
           } else if (item.title === 'Iphone') {
-            dispatch(GetAllIphone(item._id))
+            dispatch(GetAllIphone(item.title))
           }
           else if (item.title === 'Ipad') {
-            dispatch(GetAllIpad(item._id))
+            dispatch(GetAllIpad(item.title))
           }
           else if (item.title === 'Watch') {
-            dispatch(GetAllWatch(item._id))
+            dispatch(GetAllWatch(item.title))
           }
           else if (item.title === 'Sound') {
-            dispatch(GetAllSound(item._id))
+            dispatch(GetAllSound(item.title))
           }
           else if (item.title === 'Accessory') {
-            dispatch(GetAllAccessory(item._id))
+            dispatch(GetAllAccessory(item.title))
           }
 
         })

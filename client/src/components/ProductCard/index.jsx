@@ -18,7 +18,7 @@ const ProductCard = (props) => {
           prevArrow={<LeftOutlined />}
           nextArrow={<RightOutlined />}>
           {data ? data?.map((item) => (
-            <NavLink to={`/${item.slug}`} key={item._id}>
+            <NavLink to={`/${header}/${item.slug}`} key={item._id}>
               <div className="container_productcard--box">
                 <label className='label'>Mới</label>
                 <img src={item.photos[0]} alt="" />

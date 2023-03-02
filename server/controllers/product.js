@@ -2,6 +2,7 @@ import slugify from "slugify"
 import { MAX_RECORDS } from "../global/constant.js"
 import ProductModel from "../models/Product.js"
 import asyncHandler from 'express-async-handler'
+import ProductCategory from "../models/ProductCategory.js"
 
 
 const createProduct = asyncHandler(async (req, res) => {
@@ -93,8 +94,12 @@ const getAllProduct = asyncHandler(async (req, res) => {
 })
 
 const getProductsByCategory = asyncHandler(async (req, res) => {
-    const products = await ProductModel.find({ category: req.body.category })
-    console.log(products)
+
+    const category = await ProductCategory.findOne({ title: req.body.title })
+
+    if (!category) return null
+
+    const products = await ProductModel.find({ category: category._id })
 
     res.status(200).json({
         success: 'Get All Products By Category Successfully',

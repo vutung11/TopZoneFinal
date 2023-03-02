@@ -1,9 +1,9 @@
 import axiosClient from "./axiosClient";
 
 const product = {
-    All: async (idCategory) => {
+    All: async (title) => {
         const url = 'product/category';
-        return await axiosClient.post(url, { category: idCategory })
+        return await axiosClient.post(url, { title: title })
     },
     GetBySlug: async (slug) => {
         const url = `product/${slug}`;

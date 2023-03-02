@@ -1,24 +1,43 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-// import IphoneList from '../../pages/IphoneList'
-// import MacList from '../../pages/MacList';
-// import IpadList from '../../pages/IpadList';
-// import WatchList from '../../pages/WatchList';
-// import SliderCategory from '../SliderCategory';
-// import SoundList from '../../pages/SoundList';
-// import AccessoryList from '../../pages/AccessoryList';
+import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useParams } from 'react-router-dom'
+import { GetAllAccessory, GetAllIpad, GetAllIphone, GetAllMacbook, GetAllSound, GetAllWatch } from '../../redux/product';
+import ProductCard from '../ProductCard';
+
 
 import './index.css';
 
 const ProductCategory = () => {
-  const { pathname } = useLocation()
-  const iphone = '/iphone';
 
-  const mac = '/mac';
-  const ipad = '/ipad';
-  const watch = '/watch';
-  const amthanh = '/am-thanh';
-  const phukien = '/phu-kien';
+  const dispatch = useDispatch();
+  const { iphone, macbook, ipad, watch, sound, accessory } = useSelector((state) => state.product)
+  let { title } = useParams()
+  const [category, setCategory] = useState(title)
+
+  useEffect(() => {
+
+    if (title === 'Macbook') {
+      dispatch(GetAllMacbook(title))
+    } else if (title === 'Iphone') {
+      dispatch(GetAllIphone(title))
+    }
+    else if (title === 'Ipad') {
+      dispatch(GetAllIpad(title))
+    }
+    else if (title === 'Watch') {
+      dispatch(GetAllWatch(title))
+    }
+    else if (title === 'Sound') {
+      dispatch(GetAllSound(title))
+    }
+    else if (title === 'Accessory') {
+      dispatch(GetAllAccessory(title))
+    }
+
+  }, [])
+
+
 
 
 
@@ -26,12 +45,7 @@ const ProductCategory = () => {
     <div className='productcategory_container'>
       {/* <SliderCategory /> */}
 
-      {/* {pathname === iphone ? <IphoneList /> : ''}
-      {pathname === mac ? <MacList /> : ''}
-      {pathname === ipad ? <IpadList /> : ''}
-      {pathname === watch ? <WatchList /> : ''}
-      {pathname === amthanh ? <SoundList /> : ''}
-      {pathname === phukien ? <AccessoryList /> : ''} */}
+      {title ? <ProductCard data={sound} /> : <p>Loading...</p>}
 
     </div>
   )
