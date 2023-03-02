@@ -17,13 +17,13 @@ import { GetAllAccessory, GetAllIpad, GetAllIphone, GetAllMacbook, GetAllSound, 
 const Home = () => {
 
   const dispatch = useDispatch()
-
+  const [category, setCategory] = useState([])
   const { iphone, macbook, ipad, watch, sound, accessory } = useSelector((state) => state.product)
-
 
   useEffect(() => {
     axiosClient.get('/category/getall').then(response => {
       if (response.success) {
+        setCategory(response.data)
         response.data.forEach(item => {
 
           if (item.title === 'Macbook') {
@@ -55,7 +55,7 @@ const Home = () => {
     <Slider />
     <Policy />
     <div className='container_wdithbg'>
-
+      <Category category={category} />
       <ProductCard data={iphone} header={'Iphone'} />
       <ProductCard data={macbook} header={'Macbook'} />
       <ProductCard data={ipad} header={'Ipad'} />

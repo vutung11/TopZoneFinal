@@ -2,10 +2,10 @@ import ProductCategoryModel from '../models/ProductCategory.js'
 import asyncHandler from 'express-async-handler'
 
 const createProductCategory = asyncHandler(async (req, res) => {
-    const { title } = req.body
+    const { title, image } = req.body
 
     let productCategory = await ProductCategoryModel.create({
-        title
+        title, image
     })
     res.status(200).json({
         message: 'Create ProductCategory Successfully',
@@ -32,9 +32,10 @@ const getOneCategory = asyncHandler(async (req, res) => {
 
 })
 const updateCategory = asyncHandler(async (req, res) => {
-    const { _id, title } = req.body
+    const { _id, title, image } = req.body
     const category = await ProductCategoryModel.findById({ _id })
     category.title = title ?? category.title
+    category.image = image ?? category.image
 
     category.save()
     res.status(200).json({
