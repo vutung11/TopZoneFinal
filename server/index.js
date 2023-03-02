@@ -4,6 +4,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import routerUser from './routes/user.js'
 import routerProduct from './routes/product.js'
+import routerCategory from './routes/productCategory.js'
 import dbConnect from './config/dbconnect.js'
 
 const app = express()
@@ -26,5 +27,6 @@ app.use(cors({
 }))
 app.use('/api/user', routerUser)
 app.use('/api/product', routerProduct)
+app.use('/api/category', routerCategory)
 
 app.listen(4000, () => console.log('PORT 4000'))

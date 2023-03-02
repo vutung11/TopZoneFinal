@@ -1,5 +1,6 @@
 import { register, login } from './user.js'
 import { createProduct, getAllProduct, getProductBySlug, updateProduct, deleteProduct } from './product.js'
+import { createProductCategory, getAllCategory, getOneCategory, updateCategory, deleteCategory } from './productCategory.js'
 
 export const userController = {
     register,
@@ -11,4 +12,11 @@ export const productController = {
     getProductBySlug,
     updateProduct,
     deleteProduct
+}
+export const productCategoryController = {
+    createProductCategory,
+    getAllCategory,
+    getOneCategory,
+    updateCategory,
+    deleteCategory
 }

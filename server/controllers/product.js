@@ -143,7 +143,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 const deleteProduct = asyncHandler(async (req, res) => {
     try {
-        const result = await ProductModel.deleteOne({ _id: req.params })
+        const result = await ProductModel.deleteOne({ _id: req.body })
         res.status(200).json({
             message: 'Delete product by id successfully',
             data: result

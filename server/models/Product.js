@@ -9,7 +9,7 @@ export default mongoose.model('products', new Schema({
     price: { type: Number },
     pricePromo: { type: Number },
     discount: { type: Number },
-    category: { type: Number }
+    category: { type: mongoose.Types.ObjectId, ref: 'productCategory' }
 }, {
     timestamps: true
 }));
