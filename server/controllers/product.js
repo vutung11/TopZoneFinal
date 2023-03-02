@@ -32,21 +32,64 @@ const createProduct = asyncHandler(async (req, res) => {
     })
 })
 
+// let { page = 1, size = MAX_RECORDS, searchString = '' } = req.query
+
+// size = size >= MAX_RECORDS ? MAX_RECORDS : size
+
+// let products = await ProductModel.find({
+//     size, page, searchString
+// })
+
 const getAllProduct = asyncHandler(async (req, res) => {
 
-    let { page = 1, size = MAX_RECORDS, searchString = '' } = req.query
 
-    size = size >= MAX_RECORDS ? MAX_RECORDS : size
+    const queries = { ...req.query }
 
-    let products = await ProductModel.find({
-        size, page, searchString
+    const excludeFileds = ['limit', 'sort', 'page', 'fileds']
+
+    excludeFileds.forEach(el => delete queries[el])
+
+    let queryString = JSON.stringify(queries)
+
+    queryString = queryString.replace(/\b(gte|gt|lt|lte)\b/g, mactheEl => `$${mactheEl}`)
+
+    const formatQueries = JSON.parse(queryString)
+
+    if (queries?.title) formatQueries.title = { $regex: queries.title, $options: 'i' }
+
+    let queryCommand = ProductModel.find(formatQueries)
+
+    if (req.query.sort) {
+        const sortBy = req.query.sort.split(',').join(' ')
+        queryCommand = queryCommand.sort(sortBy)
+    }
+
+    if (req.query.fileds) {
+        const fileds = req.query.fileds.split(',').join(' ')
+        queryCommand = queryCommand.select(fileds)
+    }
+
+    // pagination 
+    const page = +req.query.page || 1
+    const limit = +req.query.limit || process.env.LIMIT_PAGE
+    const skip = (page - 1) * limit
+
+    queryCommand.skip(skip).limit(limit)
+
+    queryCommand.exec(async (err, products) => {
+        if (err) throw new (err.message)
+        const counts = await ProductModel.find(formatQueries).countDocuments()
+        res.status(200).json({
+            message: 'Get all product success fully',
+            counts,
+            page,
+            limit,
+            data: products,
+
+        })
     })
-    res.status(200).json({
-        message: 'Get all product success fully',
-        page,
-        size: products.length,
-        data: products
-    })
+
+
 })
 
 const getProductBySlug = asyncHandler(async (req, res) => {
