@@ -1,12 +1,12 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import IphoneList from '../../pages/IphoneList'
-import MacList from '../../pages/MacList';
-import IpadList from '../../pages/IpadList';
-import WatchList from '../../pages/WatchList';
-import SliderCategory from '../SliderCategory';
-import SoundList from '../../pages/SoundList';
-import AccessoryList from '../../pages/AccessoryList';
+// import IphoneList from '../../pages/IphoneList'
+// import MacList from '../../pages/MacList';
+// import IpadList from '../../pages/IpadList';
+// import WatchList from '../../pages/WatchList';
+// import SliderCategory from '../SliderCategory';
+// import SoundList from '../../pages/SoundList';
+// import AccessoryList from '../../pages/AccessoryList';
 
 import './index.css';
 
@@ -24,14 +24,14 @@ const ProductCategory = () => {
 
   return (
     <div className='productcategory_container'>
-      <SliderCategory />
+      {/* <SliderCategory /> */}
 
-      {pathname === iphone ? <IphoneList /> : ''}
+      {/* {pathname === iphone ? <IphoneList /> : ''}
       {pathname === mac ? <MacList /> : ''}
       {pathname === ipad ? <IpadList /> : ''}
       {pathname === watch ? <WatchList /> : ''}
       {pathname === amthanh ? <SoundList /> : ''}
-      {pathname === phukien ? <AccessoryList /> : ''}
+      {pathname === phukien ? <AccessoryList /> : ''} */}
 
     </div>
   )

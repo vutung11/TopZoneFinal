@@ -1,20 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import iphoneReducer from './iphoneSlice';
-import macbookReducer from './macbookSlice';
-import productidReducer from './getProductByIdSlice';
-import ipadReducer from './ipadSlice';
-import watchReducer from './watchSlice';
-import soundReducer from './soundSlice'
-import accessoryReducer from './accessorySlice'
+import productSlice from './product';
 
 export default configureStore({
     reducer: {
-        iphones: iphoneReducer,
-        macbooks: macbookReducer,
-        productbyid: productidReducer,
-        ipads: ipadReducer,
-        watches: watchReducer,
-        sounds: soundReducer,
-        accessories: accessoryReducer,
+        product: productSlice,
     }
 })

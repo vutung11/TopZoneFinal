@@ -5,6 +5,7 @@ const router = express.Router()
 
 router.post('/addproduct', auth, productController.createProduct)
 router.get('/getall', productController.getAllProduct)
+router.post('/category', productController.getProductsByCategory)
 router.get('/:slug', productController.getProductBySlug)
 router.patch('/update/:_id', productController.updateProduct)
 router.delete('/:_id', productController.deleteProduct)

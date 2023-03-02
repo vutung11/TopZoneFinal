@@ -1,9 +1,9 @@
 import axiosClient from "./axiosClient";
 
 const iphoneApi = {
-    getAllIphone: async () => {
-        const url = 'iphones';
-        return await axiosClient.get(url)
+    getAllIphone: async (idCategory) => {
+        const url = 'product/getall';
+        return await axiosClient.post(url, idCategory)
     },
     getIphoneById: async (id) => {
         const url = `iphones/${id}`;

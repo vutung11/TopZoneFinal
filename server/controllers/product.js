@@ -92,6 +92,16 @@ const getAllProduct = asyncHandler(async (req, res) => {
 
 })
 
+const getProductsByCategory = asyncHandler(async (req, res) => {
+    const products = await ProductModel.find({ category: req.body.category })
+    console.log(products)
+
+    res.status(200).json({
+        success: 'Get All Products By Category Successfully',
+        data: products
+    })
+})
+
 const getProductBySlug = asyncHandler(async (req, res) => {
     const { slug } = req.params
     const product = await ProductModel.findOne({ slug })
@@ -162,5 +172,6 @@ export {
     getAllProduct,
     getProductBySlug,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getProductsByCategory
 }

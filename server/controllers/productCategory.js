@@ -17,7 +17,7 @@ const getAllCategory = asyncHandler(async (req, res) => {
     const category = await ProductCategoryModel.find()
 
     res.status(200).json({
-        message: 'Get All Category Successfully',
+        success: true,
         data: category
     })
 
