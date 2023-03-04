@@ -1,0 +1,115 @@
+ .container_listingproduct {
+     width: 1200px;
+     margin: 0 auto;
+     margin-top: 100px;
+     padding-bottom: 50px;
+     background: #3d3d3d;
+ }
+
+
+ .container_listingproduct--wrap {
+     width: 1200px;
+     display: flex;
+     flex-wrap: wrap;
+     flex-direction: row;
+     gap: 15px !important;
+ }
+
+ .container_listingproduct--wrap a {
+     text-decoration: none;
+     display: flex;
+     justify-content: space-between;
+     gap: 10px !important;
+
+ }
+
+ .container_listingproduct--box {
+     width: 390px;
+     background: #333;
+     height: 400px;
+     display: flex;
+     justify-content: space-between;
+     flex-direction: column;
+     align-items: center;
+     border-radius: 24px;
+     text-align: center;
+     position: relative;
+     cursor: pointer;
+ }
+
+ .container_listingproduct--box:hover {
+     box-shadow: 0 4px 8px rgba(255, 255, 250, 0.2)
+ }
+
+ .container_listingproduct--box img {
+     width: 250px;
+     margin-top: 40px;
+ }
+
+ .container_product--box-content {
+     margin-bottom: 30px;
+     color: #fff;
+     font-size: 12px;
+     line-height: 23px;
+     text-align: center;
+     justify-content: center;
+     font-weight: 700;
+
+ }
+
+ .container_product--box-content span {
+     font-size: 18px;
+     display: flex;
+     flex-direction: row;
+     gap: 4px;
+     justify-content: center;
+ }
+
+ .container_product--box-content strike,
+ .container_product--box-content small {
+     font-size: 15px;
+     line-height: 20px;
+     font-weight: 400;
+     display: flex;
+     align-items: flex-end;
+ }
+
+ .container_listingproduct--box .label {
+     position: absolute;
+     top: 10px;
+     left: 20px;
+     color: #ff9f00;
+     border: 1px solid #ff9f00;
+     border-radius: 100px;
+     padding: 4px 12px;
+     width: 52px;
+     height: 30px;
+     font-size: 15px;
+     line-height: 20px;
+     text-align: center;
+ }
+
+ /* Xem them */
+
+ .box_learn_more {
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .learn_more {
+     background-color: #323232;
+     width: 390px;
+     height: 56px;
+     border: none;
+     border-radius: 12px;
+     font-size: 15px;
+     color: #fff;
+     line-height: 20px;
+     cursor: pointer;
+ }
+
+ .learn_more:hover {
+     box-shadow: 4px 0px 4px rgba(255, 250, 250, 0.2);
+ }

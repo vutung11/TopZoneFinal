@@ -9,42 +9,19 @@ import Policy from '../components/Policy'
 import ProductCard from '../components/ProductCard'
 import Slider from '../components/Slider'
 import Store from '../components/Store'
-import { GetAllAccessory, GetAllIpad, GetAllIphone, GetAllMacbook, GetAllSound, GetAllWatch } from '../redux/product'
 
 
 const Home = () => {
 
   const dispatch = useDispatch()
   const [category, setCategory] = useState([])
-  const { iphone, macbook, ipad, watch, sound, accessory } = useSelector((state) => state.product)
+  const { iphone, mac, ipad, watch, sound, accessory } = useSelector((state) => state.product)
 
   useEffect(() => {
     axiosClient.get('/category/getall').then(response => {
       if (response.success) {
         setCategory(response.data)
-        response.data.forEach(item => {
-
-          if (item.title === 'Macbook') {
-            dispatch(GetAllMacbook(item.title))
-          } else if (item.title === 'Iphone') {
-            dispatch(GetAllIphone(item.title))
-          }
-          else if (item.title === 'Ipad') {
-            dispatch(GetAllIpad(item.title))
-          }
-          else if (item.title === 'Watch') {
-            dispatch(GetAllWatch(item.title))
-          }
-          else if (item.title === 'Sound') {
-            dispatch(GetAllSound(item.title))
-          }
-          else if (item.title === 'Accessory') {
-            dispatch(GetAllAccessory(item.title))
-          }
-
-        })
       }
-
     })
   }, [])
 
@@ -55,7 +32,7 @@ const Home = () => {
     <div className='container_wdithbg'>
       <Category category={category} />
       <ProductCard data={iphone} header={'Iphone'} />
-      <ProductCard data={macbook} header={'Macbook'} />
+      <ProductCard data={mac} header={'Mac'} />
       <ProductCard data={ipad} header={'Ipad'} />
       <ProductCard data={watch} header={'Watch'} />
       <ProductCard data={sound} header={'Âm thanh'} />

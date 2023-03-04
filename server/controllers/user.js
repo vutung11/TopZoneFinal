@@ -44,6 +44,7 @@ const login = async (req, res) => {
                 { expiresIn: '12day' }
             )
             await UserModel.findByIdAndUpdate(exitUser._id, { refreshToken }, { new: true })
+
             res.cookie('refreshToken', refreshToken, { httpOnly: true, maxAge: 12 * 24 * 60 * 60 * 1000 })
             res.status(201).json({
                 ...exitUser.toObject(),
@@ -64,7 +65,22 @@ const login = async (req, res) => {
     }
 
 }
+const getUser = asyncHandler(async (req, res) => {
+    const { token } = req.cookies
+    if (token) {
+        jwt.verify(token, jwtSecret, {}, async (error, userData) => {
+            if (error) throw error;
+            const { firstName, lastName, email, _id } = await UserModel.findById(userData.id)
+            res.json({ firstName, lastName, email, _id })
+        })
+
+    } else {
+        res.json('null')
+    }
+
+})
 export {
     register,
-    login
+    login,
+    getUser
 }

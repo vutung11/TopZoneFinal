@@ -20,19 +20,12 @@
     align-items: center;
 }
 
-.container_header .container_header--menu li {
-    width: 95px;
+.container_header .container_header--menu a {
     text-decoration: none;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    transform: .3s;
-    cursor: pointer;
 }
 
-.container_header .container_header--menu li:hover {
-    background: #2d2d2d;
+.container_header .container_header--menu a:hover {
+    background-color: #3d3d3d;
 }
 
 .ant-input {
@@ -63,4 +56,18 @@
     position: absolute;
     right: 50px;
     top: 10px;
+}
+
+.item_menu {
+    color: #fff;
+    height: 60px;
+    width: 93px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.active .item_menu {
+    background-color: #3d3d3d;
 }

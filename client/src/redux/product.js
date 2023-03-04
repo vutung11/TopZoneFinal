@@ -4,12 +4,15 @@ import product from "../api/product";
 const initialState = {
 
     iphone: [],
-    macbook: [],
+    mac: [],
     ipad: [],
+    watch: [],
+    sound: [],
+    accessory: [],
     categories: []
 }
 export const GetAllMacbook = createAsyncThunk(
-    'macbook/category',
+    'mac/category',
     async (value, { rejectWithValue }) => {
         try {
             const data = await product.All(value);
@@ -60,7 +63,7 @@ export const GetAllWatch = createAsyncThunk(
     }
 )
 export const GetAllSound = createAsyncThunk(
-    'sound/category',
+    'am-thanh/category',
     async (value, { rejectWithValue }) => {
         try {
             const data = await product.All(value);
@@ -72,7 +75,7 @@ export const GetAllSound = createAsyncThunk(
     }
 )
 export const GetAllAccessory = createAsyncThunk(
-    'accessory/category',
+    'phu-kien/category',
     async (value, { rejectWithValue }) => {
         try {
             const data = await product.All(value);
@@ -99,11 +102,31 @@ export const GetProductBySlug = createAsyncThunk(
 const productSlice = createSlice({
     name: 'product',
     initialState,
-    reducers: {},
+    reducers: {
+        updateIphone: (state, action) => {
+            state.iphone = [...state.iphone, ...action.payload]
+        },
+        updateMac: (state, action) => {
+            state.mac = [...state.mac, ...action.payload]
+        },
+        updateIpad: (state, action) => {
+            state.ipad = [...state.ipad, ...action.payload]
+        },
+        updateWatch: (state, action) => {
+            state.watch = [...state.watch, ...action.payload]
+        },
+        updateSound: (state, action) => {
+            state.sound = [...state.sound, ...action.payload]
+        },
+        updateAccessory: (state, action) => {
+            state.accessory = [...state.accessory, ...action.payload]
+        }
+
+    },
     extraReducers: (builder) => {
         builder
             .addCase(GetAllMacbook.fulfilled, (state, action) => {
-                state.macbook = action.payload
+                state.mac = action.payload
             })
             .addCase(GetAllIphone.fulfilled, (state, action) => {
                 state.iphone = action.payload
@@ -127,6 +150,6 @@ const productSlice = createSlice({
 
 })
 
-// export const { getAllCategories } = productSlice.actions
+export const { updateIphone, updateMac, updateIpad, updateWatch, updateSound, updateAccessory } = productSlice.actions
 
 export default productSlice.reducer;

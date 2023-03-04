@@ -1,10 +1,11 @@
-import { register, login } from './user.js'
+import { register, login, getUser } from './user.js'
 import { createProduct, getAllProduct, getProductBySlug, updateProduct, deleteProduct, getProductsByCategory } from './product.js'
 import { createProductCategory, getAllCategory, getOneCategory, updateCategory, deleteCategory } from './productCategory.js'
 
 export const userController = {
     register,
-    login
+    login,
+    getUser
 }
 export const productController = {
     createProduct,

@@ -95,16 +95,41 @@ const getAllProduct = asyncHandler(async (req, res) => {
 
 const getProductsByCategory = asyncHandler(async (req, res) => {
 
-    const category = await ProductCategory.findOne({ title: req.body.title })
+    const page = +req.query.page || 1
+    const limit = +req.query.limit || process.env.LIMIT_PAGE
+    const skip = (page - 1) * limit
 
-    if (!category) return null
 
+    const category = await ProductCategory.findOne({ slug: req.body.slug })
+
+    if (!category) {
+        // Nếu không tìm thấy danh mục, trả về lỗi 404 Not Found
+        res.status(404).json({ error: 'Category not found' });
+        return;
+    }
     const products = await ProductModel.find({ category: category._id })
-
-    res.status(200).json({
-        success: 'Get All Products By Category Successfully',
-        data: products
+        .skip(skip)
+        .limit(limit)
+    // Sử dụng phương thức countDocuments() của mongoose để đếm số lượng sản phẩm thuộc danh mục
+    const totalProducts = await ProductModel.countDocuments({
+        category: category._id,
     })
+    res.status(200).json({
+        success: true,
+        data: products,
+        page,
+        limit,
+        totalPages: Math.ceil(totalProducts / limit),
+        totalProducts,
+    });
+
+
+    // const products = await ProductModel.find({ category: category._id })
+
+    // res.status(200).json({
+    //     success: 'Get All Products By Category Successfully',
+    //     data: products
+    // })
 })
 
 const getProductBySlug = asyncHandler(async (req, res) => {

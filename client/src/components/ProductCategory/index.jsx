@@ -1,51 +1,40 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom'
-import { GetAllAccessory, GetAllIpad, GetAllIphone, GetAllMacbook, GetAllSound, GetAllWatch } from '../../redux/product';
-import ProductCard from '../ProductCard';
-
+import React from 'react'
+import { useSelector } from 'react-redux';
+import SliderCategory from '../SliderCategory'
+import { useParams } from 'react-router-dom'
 
 import './index.css';
+import ListingProduct from '../ListingProduct';
 
 const ProductCategory = () => {
 
-  const dispatch = useDispatch();
-  const { iphone, macbook, ipad, watch, sound, accessory } = useSelector((state) => state.product)
-  let { title } = useParams()
-  const [category, setCategory] = useState(title)
+  const { iphone, mac, ipad, watch, sound, accessory } = useSelector((state) => state.product);
+  let { slug } = useParams();
+  let data = [];
 
-  useEffect(() => {
-
-    if (title === 'Macbook') {
-      dispatch(GetAllMacbook(title))
-    } else if (title === 'Iphone') {
-      dispatch(GetAllIphone(title))
-    }
-    else if (title === 'Ipad') {
-      dispatch(GetAllIpad(title))
-    }
-    else if (title === 'Watch') {
-      dispatch(GetAllWatch(title))
-    }
-    else if (title === 'Sound') {
-      dispatch(GetAllSound(title))
-    }
-    else if (title === 'Accessory') {
-      dispatch(GetAllAccessory(title))
-    }
-
-  }, [])
-
-
-
-
+  if (slug === 'mac') {
+    data = mac
+  } else if (slug === 'iphone') {
+    data = iphone;
+  }
+  else if (slug === 'ipad') {
+    data = ipad;
+  }
+  else if (slug === 'watch') {
+    data = watch;
+  }
+  else if (slug === 'am-thanh') {
+    data = sound;
+  }
+  else if (slug === 'phu-kien') {
+    data = accessory;
+  }
 
   return (
     <div className='productcategory_container'>
-      {/* <SliderCategory /> */}
+      <SliderCategory />
+      {slug ? <ListingProduct data={data} slug={slug} /> : <p>Loading ...</p>}
 
-      {title ? <ProductCard data={sound} /> : <p>Loading...</p>}
 
     </div>
   )
