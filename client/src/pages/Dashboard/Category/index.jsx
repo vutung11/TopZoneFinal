@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import { DeleteTwoTone } from '@ant-design/icons';
+
 import axiosClient from '../../../api/axiosClient';
 import slugify from 'slugify';
 import './index.css';
@@ -27,6 +28,14 @@ const Category = () => {
             setCategory(newCategoryList);
         })
     }
+    const deleteCategory = async (_id) => {
+        await axiosClient.delete(`category/${_id}`, { _id }).then(response => {
+            const newCategoryList = category.filter((cat) => cat._id !== _id);
+            console.log(category, '12', newCategoryList)
+            setCategory(newCategoryList);
+        })
+    }
+
     return (
         <div className='dashboard_category'>
             <div className='dashboard_category-add'>
@@ -62,6 +71,7 @@ const Category = () => {
                     <div key={cate._id} className='dashboard_category-show--content'>
                         <img src={cate.image} alt="" />
                         <h3>{cate.title}</h3>
+                        <DeleteTwoTone className='delete_icon' onClick={() => deleteCategory(cate._id)} />
                     </div>
                 ))
                 }

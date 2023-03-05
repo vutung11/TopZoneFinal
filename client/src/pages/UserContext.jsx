@@ -11,7 +11,6 @@ export function UserConTextProvider({ children }) {
 
         if (!user) {
             axiosClient.get('/user/profile').then(({ data }) => {
-                console.log(data)
                 setUser(data);
                 setReady(true);
             })

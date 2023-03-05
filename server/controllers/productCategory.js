@@ -52,7 +52,7 @@ const updateCategory = asyncHandler(async (req, res) => {
 
 const deleteCategory = asyncHandler(async (req, res) => {
     try {
-        const category = await ProductCategoryModel.deleteOne({ _id: req.body })
+        const category = await ProductCategoryModel.deleteOne({ _id: req.body._id })
 
         res.status(200).json({
             message: 'Delete Category Successfully',

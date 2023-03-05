@@ -81,3 +81,16 @@
 .dashboard_category-title {
     margin-left: 70px;
 }
+
+.delete_icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 35px;
+    height: 35px;
+    background-color: #2d2d2d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}

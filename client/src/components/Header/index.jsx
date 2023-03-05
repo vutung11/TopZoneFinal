@@ -13,7 +13,6 @@ import { UserContext } from '../../pages/UserContext';
 const Header = () => {
     const { Search } = Input;
     const { user } = useContext(UserContext);
-    console.log(user, 'user')
 
     return (
         <div className='container_header'>

@@ -5,7 +5,6 @@ import './index.css';
 
 const Dashboard = () => {
     const { pathname } = useLocation();
-    console.log(pathname);
     return (
         <div className="container_dashboard">
             <div className="container_dashboard-menu">
