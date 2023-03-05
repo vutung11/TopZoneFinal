@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import axiosClient from '../../api/axiosClient';
 import { UserContext } from '../../pages/UserContext';
@@ -11,12 +12,9 @@ const Login = () => {
     const handleLoginSubmit = async (ev) => {
         ev.preventDefault();
         try {
-            const { data } = await axiosClient.post('/user/login', { email, password });
+            const { data } = await axios.post('/user/login', { email, password });
             alert('Login successfully');
-
             setUser(data);
-            console.log(data)
-
 
         } catch (error) {
             alert('Login failed');

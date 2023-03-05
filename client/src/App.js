@@ -4,7 +4,6 @@ import About from './pages/About';
 import Home from './pages/Home';
 import Page404 from './pages/Page404';
 import './App.css';
-import Header from './components/Header';
 import ProductDetails from './components/ProductDetails';
 import ProductCategory from './components/ProductCategory';
 import axiosClient from './api/axiosClient';
@@ -13,6 +12,14 @@ import { useDispatch } from 'react-redux';
 import Login from './components/Login';
 import Register from './components/Register';
 import { UserConTextProvider } from './pages/UserContext';
+import axios from 'axios';
+import Dashboard from './pages/Dashboard';
+import { Layout } from 'antd';
+import Category from './pages/Dashboard/Category';
+
+axios.defaults.baseURL = 'http://localhost:4000/api/';
+axios.defaults.withCredentials = true;
+
 function App() {
 
   const dispatch = useDispatch();
@@ -51,15 +58,21 @@ function App() {
     <div className="App">
       <UserConTextProvider>
         <BrowserRouter>
-          <Header />
+          {/* <Header /> */}
           <Routes>
-            <Route path='/' element={<Home />} />
+            {/* <Route path='/' element={<Layout />} > */}
+            <Route index element={<Home />} />
             <Route path='/about' element={<About />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/:header/:slug' element={<ProductDetails />} />
             <Route path='/:slug' element={<ProductCategory />} />
+            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/dashboard/category' element={<Dashboard />} />
+
+            {/* <Route path='/dashboard/category' element={<Category />} /> */}
             <Route path='*' element={<Page404 />} />
+            {/* </Route> */}
           </Routes>
         </BrowserRouter>
       </UserConTextProvider>

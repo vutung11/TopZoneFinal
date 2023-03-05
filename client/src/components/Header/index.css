@@ -71,3 +71,14 @@
 .active .item_menu {
     background-color: #3d3d3d;
 }
+
+.user_profile {
+    margin-left: 50px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.container_header a {
+    text-decoration: none;
+}

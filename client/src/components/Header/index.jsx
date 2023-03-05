@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import { Form } from 'antd';
 import { Input } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 
 
 import './index.css';
+import { UserContext } from '../../pages/UserContext';
 
 
 
 const Header = () => {
     const { Search } = Input;
+    const { user } = useContext(UserContext);
+    console.log(user, 'user')
+
     return (
         <div className='container_header'>
             <Link to={'/'}>
@@ -68,15 +72,27 @@ const Header = () => {
                 <Form>
                     <Search className='input_search' placeholder="Tìm kiếm sản phẩm" enterButton />
                 </Form>
-                <NavLink className={(navData) => navData.isActive ? 'active' : ''} to={'/login'}>
+                {/* <NavLink className={(navData) => navData.isActive ? 'active' : ''} to={'/login'}>
                     <div className='item_menu'>
                         Login
                     </div>
-                </NavLink>
+                </NavLink> */}
             </ul>
+            {user && (
+                <Link to={'/dashboard'}>
+                    <div className='user_profile'>
+                        <UserOutlined />
+                        {user.firstName} {user.lastName}
+
+                    </div>
+                </Link>
+            )}
+
+
             <ShoppingCartOutlined />
 
         </div>
+
     )
 }
 
