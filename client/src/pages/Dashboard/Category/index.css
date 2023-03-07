@@ -48,7 +48,10 @@
 }
 
 .dashboard_category-form {
-    margin-left: 70px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .dashboard_category-form form {
@@ -61,6 +64,16 @@
     padding: 8px 16px;
     border-radius: 6px;
     border: none;
+}
+
+.dashboard_category-form-btn {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.dashboard_category-form-btn .success {
+    background-color: blue;
 }
 
 .dashboard_category-form button {

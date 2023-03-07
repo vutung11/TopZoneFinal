@@ -1,18 +1,9 @@
 import ProductCategoryModel from '../models/ProductCategory.js'
 import asyncHandler from 'express-async-handler'
-import slugify from 'slugify'
 
 const createProductCategory = asyncHandler(async (req, res) => {
-    let { title, image, slug } = req.body
-
-    const slugTitle = slugify(title, {
-        replacement: '-',
-        lower: true,
-        locale: 'vi',
-    })
-    let productCategory = await ProductCategoryModel.create({
-        title, image, slug: slugTitle
-    })
+    const { title, image, slug } = req.body
+    const productCategory = await ProductCategoryModel.create({ title, image, slug })
     res.status(200).json({
         message: 'Create ProductCategory Successfully',
         data: productCategory
@@ -52,8 +43,9 @@ const updateCategory = asyncHandler(async (req, res) => {
 
 const deleteCategory = asyncHandler(async (req, res) => {
     try {
-        const category = await ProductCategoryModel.deleteOne({ _id: req.body._id })
-
+        const { _id } = req.body
+        const category = await ProductCategoryModel.findOneAndDelete(_id)
+        console.log(category)
         res.status(200).json({
             message: 'Delete Category Successfully',
             data: category

@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import product from "../api/product";
 
 const initialState = {
-
     iphone: [],
     mac: [],
     ipad: [],

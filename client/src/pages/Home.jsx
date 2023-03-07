@@ -9,28 +9,46 @@ import Policy from '../components/Policy'
 import ProductCard from '../components/ProductCard'
 import Slider from '../components/Slider'
 import Store from '../components/Store'
+import { GetAllAccessory, GetAllIpad, GetAllIphone, GetAllMacbook, GetAllSound, GetAllWatch } from '../redux/product'
 
 
 const Home = () => {
 
   const dispatch = useDispatch()
-  const [category, setCategory] = useState([])
+  const { categories } = useSelector((state) => state.category);
+  console.log(categories)
   const { iphone, mac, ipad, watch, sound, accessory } = useSelector((state) => state.product)
-
   useEffect(() => {
-    axiosClient.get('/category/getall').then(response => {
-      if (response.success) {
-        setCategory(response.data)
+    categories.forEach(item => {
+      console.log(item.slug)
+
+      if (item.slug === 'mac') {
+        dispatch(GetAllMacbook(item.slug))
+      } else if (item.slug === 'iphone') {
+        dispatch(GetAllIphone(item.slug))
+      }
+      else if (item.slug === 'ipad') {
+        dispatch(GetAllIpad(item.slug))
+      }
+      else if (item.slug === 'watch') {
+        dispatch(GetAllWatch(item.slug))
+      }
+      else if (item.slug === 'am-thanh') {
+        dispatch(GetAllSound(item.slug))
+      }
+      else if (item.slug === 'phu-kien') {
+        dispatch(GetAllAccessory(item.slug))
       }
     })
   }, [])
+
 
 
   return <React.Fragment>
     <Slider />
     <Policy />
     <div className='container_wdithbg'>
-      <Category category={category} />
+      <Category category={categories} />
       <ProductCard data={iphone} header={'Iphone'} />
       <ProductCard data={mac} header={'Mac'} />
       <ProductCard data={ipad} header={'Ipad'} />

@@ -1,7 +1,9 @@
 import React from 'react';
-import { NavLink, useLocation, useParams, Switch, Route } from 'react-router-dom';
+import { NavLink, useLocation, useParams, Switch, Route, Outlet } from 'react-router-dom';
 import Category from './Category';
+import Form from './Category/Form';
 import './index.css';
+import Product from './Product';
 
 const Dashboard = () => {
     const { pathname } = useLocation();
@@ -28,11 +30,7 @@ const Dashboard = () => {
                 </ul>
             </div>
             <div className='container_dashboard-tab'>
-                {pathname === '/dashboard/' && <p>Dashboard</p>}
-                {pathname === '/dashboard/category' && (<Category />)}
-                {pathname === '/dashboard/product' && <p>product</p>}
-                {pathname === '/dashboard/cart' && <p>gio hang</p>}
-                {pathname === '/dashboard/profile' && <p>Nguoi dung</p>}
+                <Outlet />
             </div>
         </div>
     )

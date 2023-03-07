@@ -68,7 +68,7 @@ const register = asyncHandler(async (req, res) => {
 const getUser = asyncHandler(async (req, res) => {
     const { token } = req.cookies
     if (token) {
-        jwt.verify(token, jwtSecret, {}, async (error, userData) => {
+        jwt.verify(token, process.env.JWT_SERECT, {}, async (error, userData) => {
             if (error) throw error;
             const { firstName, lastName, email, _id } = await UserModel.findById(userData.id)
             res.json({ firstName, lastName, email, _id })
