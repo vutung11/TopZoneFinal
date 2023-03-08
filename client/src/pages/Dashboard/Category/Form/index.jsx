@@ -56,7 +56,7 @@ const Form = () => {
 
         await axiosClient.post('/category/create', {
             title, image, slug: slugify(title, {
-                replacement: '_',
+                replacement: '-',
                 lower: true,
             })
         }

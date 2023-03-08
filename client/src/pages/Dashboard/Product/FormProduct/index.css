@@ -1,0 +1,32 @@
+.form_product {}
+
+.form_product h2 {
+    padding: 20px 0 0 100px;
+}
+
+.form_product-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 100px;
+}
+
+.form_product-item label {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.form_product-item input,
+.form_product-item select,
+.form_product-item button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+}
+
+.form_product-item button {
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
