@@ -18,7 +18,6 @@ const Category = () => {
     const deleteCategory = async (_id) => {
         await axiosClient.delete(`category/${_id}`, { _id }).then(response => {
             const newCategoryList = category.filter((cat) => cat._id !== _id);
-            console.log(category, '12', newCategoryList)
             setCategory(newCategoryList);
         })
     }

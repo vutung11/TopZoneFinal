@@ -8,8 +8,22 @@ const initialState = {
     watch: [],
     sound: [],
     accessory: [],
-    categories: []
+    categories: [],
+    allproduct: [],
 }
+export const GetAllProduct = createAsyncThunk(
+    'getall/product',
+    async (value, { rejectWithValue }) => {
+        try {
+            const data = await product.AllProduct(value);
+            return data;
+
+        } catch (error) {
+            return rejectWithValue((error).response.data)
+        }
+    }
+)
+
 export const GetAllMacbook = createAsyncThunk(
     'mac/category',
     async (value, { rejectWithValue }) => {
@@ -144,6 +158,9 @@ const productSlice = createSlice({
             })
             .addCase(GetProductBySlug.fulfilled, (state, action) => {
                 state.productbyslug = action.payload
+            })
+            .addCase(GetAllProduct.fulfilled, (state, action) => {
+                state.allproduct = action.payload
             })
     }
 

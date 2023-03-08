@@ -98,6 +98,14 @@ const Form = () => {
                 </select>
                 <label>Photos</label>
                 <input onChange={(ev) => uploadPhoto(ev)} type="file" multiple name='photos' />
+                <div className='pre_photos'>
+                    {photos && (
+
+                        photos.map((photo, index) => (
+                            <img key={index} src={photo} alt="" />
+                        ))
+                    )}
+                </div>
                 <button>Đăng sản phẩm</button>
             </form>
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axiosClient from '../../../../api/axiosClient';
-import { Navigate } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import slugify from 'slugify';
 import axios from 'axios';
 
@@ -73,6 +73,7 @@ const Form = () => {
     }
     return (
         <div className="dashboard_category-form">
+            <h2>Danh mục</h2>
             <form onSubmit={handleAddCategory}>
                 <input type="text"
                     placeholder='Tilte Category'
@@ -92,6 +93,9 @@ const Form = () => {
                     name='image'
                     onChange={(ev) => uploadPhoto(ev)}
                 />
+                {image && (
+                    <img className='pre_image' src={image} alt="" />
+                )}
                 {/* <PhotosUploader addPhotos={image} onChange={setImage} /> */}
                 <div className='dashboard_category-form-btn'>
                     <button className='success'>Thêm danh mục</button><br />

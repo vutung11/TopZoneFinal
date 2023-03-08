@@ -49,9 +49,16 @@
 
 .dashboard_category-form {
     margin-top: 50px;
+    margin-left: 100px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.dashboard_category-form a {
+    display: inline;
+    text-decoration: none;
 }
 
 .dashboard_category-form form {
@@ -106,4 +113,10 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+}
+
+.pre_image {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
 }

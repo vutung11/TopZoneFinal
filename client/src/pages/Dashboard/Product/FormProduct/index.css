@@ -30,3 +30,15 @@
     font-size: 16px;
     cursor: pointer;
 }
+
+.pre_photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.pre_photos img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}

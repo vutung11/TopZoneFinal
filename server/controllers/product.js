@@ -85,7 +85,9 @@ const getAllProduct = asyncHandler(async (req, res) => {
             counts,
             page,
             limit,
+            totalPages: Math.ceil(counts / limit),
             data: products,
+
 
         })
     })
@@ -183,18 +185,23 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 const deleteProduct = asyncHandler(async (req, res) => {
     try {
-        const result = await ProductModel.deleteOne({ _id: req.body })
+        const { _id } = req.body;
+        const result = await ProductModel.findOneAndDelete(_id);
+        console.log(result);
+
+        const products = await ProductModel.find();
         res.status(200).json({
             message: 'Delete product by id successfully',
-            data: result
-        })
+            data: products,
+        });
     } catch (error) {
-        console.log(error.message)
-
+        console.log(error.message);
+        res.status(500).json({
+            message: 'Internal server error',
+        });
     }
+});
 
-
-})
 
 
 export {
