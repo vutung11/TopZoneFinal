@@ -9,18 +9,17 @@ const Product = () => {
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
     const [products, setProducts] = useState([]);
-    // const { allproduct } = useSelector((state) => state.product);
+    const [count, setCount] = useState(0);
 
-    console.log(products);
+
     useEffect(() => {
-
         const fetchData = async () => {
             const data = await dispatch(GetAllProduct(page, limit));
-            setProducts(data.payload)
-        }
-        fetchData();
+            setProducts(data.payload);
+        };
 
-    }, [page, dispatch, limit]);
+        fetchData();
+    }, [page, limit, dispatch, count]);
 
     const handleNext = () => {
         if (page < products.totalPages)
@@ -29,19 +28,16 @@ const Product = () => {
 
     const handlePrev = () => {
         setPage(prev => prev - 1);
-        console.log(page)
+    }
+    const deleteProduct = async (_id) => {
+        await axiosClient.delete(`product/${_id}`, { _id });
+        const newProducts = products.data.filter((cat) => cat._id !== _id);
+        setProducts({ ...products, data: newProducts });
+        setCount(count - 1);
+
     }
 
-    const deleteProduct = async (_id) => {
-        try {
-            console.log(_id)
-            await axiosClient.delete(`product/${_id}`);
-            const data = products?.data?.filter(product => product._id !== _id);
-            setProducts(data)
-        } catch (error) {
-            console.log(error);
-        }
-    };
+
     return (
         <div className='dashboard_product'>
             <div className="dashboard_product-add">

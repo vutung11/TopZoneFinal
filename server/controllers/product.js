@@ -185,24 +185,25 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 const deleteProduct = asyncHandler(async (req, res) => {
     try {
-        const { _id } = req.body;
-        const result = await ProductModel.findOneAndDelete(_id);
-        console.log(result);
+        const productId = req.params.id; // Lấy id từ đường dẫn
 
-        const products = await ProductModel.find();
+        const products = await ProductModel.findByIdAndDelete(productId);
+        if (!products) {
+            return res.status(404).json({ message: 'Không tìm thấy sản phẩm để xoá' });
+        }
+
+        console.log('Đã xoá sản phẩm:', products);
+
         res.status(200).json({
-            message: 'Delete product by id successfully',
-            data: products,
+            message: 'Xoá sản phẩm thành công'
         });
     } catch (error) {
-        console.log(error.message);
+        console.error(error);
         res.status(500).json({
-            message: 'Internal server error',
+            message: 'Đã xảy ra lỗi khi xoá sản phẩm'
         });
     }
 });
-
-
 
 export {
     createProduct,

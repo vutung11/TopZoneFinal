@@ -43,21 +43,26 @@ const updateCategory = asyncHandler(async (req, res) => {
 
 const deleteCategory = asyncHandler(async (req, res) => {
     try {
-        const { _id } = req.body
-        const category = await ProductCategoryModel.findOneAndDelete(_id)
-        console.log(category)
+        const categoryId = req.params.id; // Lấy id từ đường dẫn
+
+        const category = await ProductCategoryModel.findByIdAndDelete(categoryId);
+
+        if (!category) {
+            return res.status(404).json({ message: 'Không tìm thấy danh mục để xoá' });
+        }
+
+        console.log('Đã xoá danh mục:', category);
+
         res.status(200).json({
-            message: 'Delete Category Successfully',
-            data: category
-        })
-
+            message: 'Xoá danh mục thành công'
+        });
     } catch (error) {
-        res.status(400).json({
-            message: 'Delete failed'
-        })
-
+        console.error(error);
+        res.status(500).json({
+            message: 'Đã xảy ra lỗi khi xoá danh mục'
+        });
     }
-})
+});
 
 export {
     createProductCategory,
