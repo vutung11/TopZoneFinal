@@ -29,10 +29,11 @@ const getOneCategory = asyncHandler(async (req, res) => {
 
 })
 const updateCategory = asyncHandler(async (req, res) => {
-    const { _id, title, image } = req.body
+    const { _id, title, image, slug } = req.body
     const category = await ProductCategoryModel.findById({ _id })
     category.title = title ?? category.title
     category.image = image ?? category.image
+    category.slug = slug ?? category.slug
 
     category.save()
     res.status(200).json({

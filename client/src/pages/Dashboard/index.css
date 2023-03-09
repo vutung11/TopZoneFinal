@@ -70,6 +70,10 @@
 
 }
 
+.dashboard_product-list {
+    position: relative;
+}
+
 .dashboard_product-list table {
     width: 100%;
     background-color: #f1e8e8;

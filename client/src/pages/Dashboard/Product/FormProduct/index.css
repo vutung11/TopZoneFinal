@@ -42,3 +42,15 @@
     height: 200px;
     object-fit: cover;
 }
+
+.modal-container {
+    background: #3d3d3d;
+    width: 300px;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

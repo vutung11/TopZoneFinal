@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axiosClient from '../../../../api/axiosClient';
-import { Navigate, NavLink } from 'react-router-dom';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
 import slugify from 'slugify';
 import axios from 'axios';
 
 const Form = () => {
+
+    const { id } = useParams();
     const [category, setCategory] = useState([]);
+    const [data, setData] = useState([]);
     const [title, setTitle] = useState('');
     const [image, setImage] = useState('');
     const [redirect, setRedirect] = useState('');
@@ -13,6 +16,18 @@ const Form = () => {
     const [slug, setSlug] = useState('');
 
 
+    console.log(data);
+
+    useEffect(() => {
+        if (id) {
+            axiosClient.get(`/category/${id}`).then(response => {
+                setTitle(response.data.title)
+                setImage(response.data.image)
+                setSlug(response.data.slug)
+            })
+        }
+
+    }, [id]);
 
     useEffect(() => {
         axiosClient.get('/category/getall').then(response => {
@@ -53,20 +68,29 @@ const Form = () => {
     const handleAddCategory = async (ev) => {
         ev.preventDefault();
 
+        if (id) {
+            await axiosClient.put(`/category/${id}`, {
 
-        await axiosClient.post('/category/create', {
-            title, image, slug: slugify(title, {
-                replacement: '-',
-                lower: true,
+                _id: id, title, image, slug: slugify(title, {
+                    replacement: '-',
+                    lower: true,
+                })
+            }).then(response => {
+                // setRedirect('/dashboard/category');
+            })
+        } else {
+            await axiosClient.post('/category/create', {
+                title, image, slug: slugify(title, {
+                    replacement: '-',
+                    lower: true,
+                })
+            }).then(response => {
+                // console.log(response)
+                const newCategoryList = [...category, response.data];
+                setCategory(newCategoryList);
+                // setRedirect('/dashboard/category');
             })
         }
-        ).then(response => {
-            // console.log(response)
-            const newCategoryList = [...category, response.data];
-            setCategory(newCategoryList);
-            // setRedirect('/dashboard/category');
-        })
-
     }
     if (redirect) {
         return <Navigate to={redirect} />
@@ -78,17 +102,11 @@ const Form = () => {
                 <input type="text"
                     placeholder='Tilte Category'
                     name='title'
+                    value={title}
                     onChange={(ev) => setTitle(ev.target.value)}
                 />
                 <br />
-                {/* <input type="text"
-                    placeholder='Tilte Category'
-                    name='slug'
-                    onChange={(ev) => setSlug(ev.target.value)}
-                />
-                <br /> */}
                 <input type="file"
-                    // placeholder='Image...'
                     multiple
                     name='image'
                     onChange={(ev) => uploadPhoto(ev)}
@@ -96,9 +114,8 @@ const Form = () => {
                 {image && (
                     <img className='pre_image' src={image} alt="" />
                 )}
-                {/* <PhotosUploader addPhotos={image} onChange={setImage} /> */}
                 <div className='dashboard_category-form-btn'>
-                    <button className='success'>Thêm danh mục</button><br />
+                    <button className='success'>{id ? 'Cập nhât' : 'Thêm danh mục'}</button><br />
                     <button className='cancel' >Huỷ</button>
                 </div>
 
@@ -106,5 +123,4 @@ const Form = () => {
         </div>
     )
 }
-
 export default Form
