@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import axiosClient from '../../../api/axiosClient';
+import { GetAllCategory } from '../../../redux/categories';
 import { GetAllProduct } from '../../../redux/product';
 
 const Product = () => {
@@ -12,6 +13,18 @@ const Product = () => {
     const [count, setCount] = useState(0);
     const [deleteProductId, setDeleteProductId] = useState(null);
     const [showModal, setShowModal] = useState(false);
+
+    const { categories } = useSelector((state) => state.category);
+
+    useEffect(() => {
+        dispatch(GetAllCategory())
+    }, [])
+
+    const getCategoryTitle = (categoryId) => {
+        const category = categories.find((cat) => cat._id === categoryId);
+        return category ? category.title : '';
+    };
+
 
 
     useEffect(() => {
@@ -68,13 +81,16 @@ const Product = () => {
                     {products && products?.data?.map(product => (
                         <tr>
                             <td>{product.title}</td>
-                            <td>Iphone</td>
+                            <td>{getCategoryTitle(product.category)}</td>
                             <td>{product.price}</td>
                             <td>{product.pricePromo}</td>
                             <td>{product.discount}</td>
                             <td>{product.description}</td>
                             <img src={product?.photos[0]} alt="" />
                             <td>
+                                <NavLink to={`/dashboard/product/${product._id}`}>
+                                    <button>Chỉnh sửa</button>
+                                </NavLink>
                                 <button onClick={() => handleDeleteClick(product._id)}>Xoá</button>
                             </td>
                             {showModal && (

@@ -16,7 +16,6 @@ const Form = () => {
     const [slug, setSlug] = useState('');
 
 
-    console.log(data);
 
     useEffect(() => {
         if (id) {
@@ -57,7 +56,6 @@ const Form = () => {
                     "Content-Type": "multipart/form-data",
                 }
             }).then(response => {
-                console.log(response)
                 urls.push(response?.data?.secure_url);
             })
         }
@@ -85,7 +83,6 @@ const Form = () => {
                     lower: true,
                 })
             }).then(response => {
-                // console.log(response)
                 const newCategoryList = [...category, response.data];
                 setCategory(newCategoryList);
                 // setRedirect('/dashboard/category');

@@ -7,7 +7,8 @@ router.post('/addproduct', productController.createProduct)
 router.get('/getall', productController.getAllProduct)
 router.post('/category', productController.getProductsByCategory)
 router.get('/:slug', productController.getProductBySlug)
-router.patch('/update/:_id', productController.updateProduct)
+router.get('/getone/:id', productController.getOneProductById)
+router.put('/update/:_id', productController.updateProduct)
 router.delete('/:id', productController.deleteProduct)
 
 export default router

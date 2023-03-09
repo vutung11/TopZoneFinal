@@ -1,5 +1,4 @@
 import slugify from "slugify"
-import { MAX_RECORDS } from "../global/constant.js"
 import ProductModel from "../models/Product.js"
 import asyncHandler from 'express-async-handler'
 import ProductCategory from "../models/ProductCategory.js"
@@ -7,24 +6,9 @@ import ProductCategory from "../models/ProductCategory.js"
 
 const createProduct = asyncHandler(async (req, res) => {
     const { title, slug, description, photos, price, pricePromo, discount, category } = req.body
-    const slugTitle = slugify(title, {
-        replacement: '-',
-        lower: true,
-        replacement: (/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a'),
-        replacement: (/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e'),
-        replacement: (/i|í|ì|ỉ|ĩ|ị/gi, 'i'),
-        replacement: (/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o'),
-        replacement: (/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u'),
-        replacement: (/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y'),
-        replacement: (/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y'),
-        replacement: (/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, ''),
-        replacement: (/\-\-\-\-\-/gi, '-'),
-        replacement: (/\-\-\-\-/gi, '-'),
-        replacement: (/\-\-\-/gi, '-'),
-        replacement: (/\-\-/gi, '-'),
-    })
-    let product = new ProductModel({
-        title, slug: slugTitle, description, photos, price, pricePromo, discount, category
+
+    const product = new ProductModel({
+        title, slug, description, photos, price, pricePromo, discount, category
     })
     product.save()
     res.status(200).json({
@@ -33,14 +17,15 @@ const createProduct = asyncHandler(async (req, res) => {
     })
 })
 
-// let { page = 1, size = MAX_RECORDS, searchString = '' } = req.query
+const getOneProductById = asyncHandler(async (req, res) => {
+    const { id } = req.params
+    const product = await ProductModel.findOne({ id })
+    res.status(200).json({
+        message: 'Get One Product byId Successfully',
+        data: product
+    })
 
-// size = size >= MAX_RECORDS ? MAX_RECORDS : size
-
-// let products = await ProductModel.find({
-//     size, page, searchString
-// })
-
+})
 const getAllProduct = asyncHandler(async (req, res) => {
 
 
@@ -125,13 +110,6 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
         totalProducts,
     });
 
-
-    // const products = await ProductModel.find({ category: category._id })
-
-    // res.status(200).json({
-    //     success: 'Get All Products By Category Successfully',
-    //     data: products
-    // })
 })
 
 const getProductBySlug = asyncHandler(async (req, res) => {
@@ -211,5 +189,6 @@ export {
     getProductBySlug,
     updateProduct,
     deleteProduct,
-    getProductsByCategory
+    getProductsByCategory,
+    getOneProductById
 }

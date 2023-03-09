@@ -1,11 +1,16 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import axiosClient from '../../../../api/axiosClient';
+import slugify from 'slugify';
+
 import './index.css';
 
 const Form = () => {
 
+    const { id } = useParams();
     const { categories } = useSelector(state => state.category);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -14,6 +19,24 @@ const Form = () => {
     const [discount, setDiscount] = useState();
     const [category, setCategory] = useState();
     const [photos, setPhotos] = useState([]);
+    const [slug, setSlug] = useState('');
+
+
+
+    useEffect(() => {
+        if (id)
+            axiosClient.get(`product/getone/${id}`).then(response => {
+                const data = response.data
+                setTitle(data.title);
+                setDescription(data.description);
+                setPrice(data.price);
+                setPricePromo(data.pricePromo);
+                setDiscount(data.discount);
+                setCategory(data.category);
+                setPhotos(data.photos);
+
+            })
+    }, [id])
 
     const uploadPhoto = async (ev) => {
         const files = ev.target.files;
@@ -36,7 +59,6 @@ const Form = () => {
                     "Content-Type": "multipart/form-data",
                 }
             }).then(response => {
-                console.log(response)
                 urls.push(response?.data?.secure_url);
             })
         }
@@ -46,17 +68,25 @@ const Form = () => {
 
     const handleSubmitProduct = (ev) => {
         ev.preventDefault();
-        console.log(ev)
-        axiosClient.post('/product/addproduct',
-            { title, description, price, pricePromo, discount, category, photos })
-            .then(response => {
-                console.log(response)
-                // const newCategoryList = [...category, response.data];
-                // setCategory(newCategoryList);
-                // setRedirect('/dashboard/category');
-            })
-    }
+        if (id) {
+            axiosClient.put(`product/update/${id}`, {
+                _id: id, title, slug: slugify(title, {
+                    replacement: '-',
+                    lower: true,
+                }), description, photos, price, pricePromo, discount, category
 
+            });
+
+        } else if (id === undefined) {
+            axiosClient.post('/product/addproduct',
+                { title, description, price, pricePromo, discount, category, photos })
+                .then(response => {
+                    // const newCategoryList = [...category, response.data];
+                    // setCategory(newCategoryList);
+                    // setRedirect('/dashboard/category');
+                })
+        }
+    }
 
     return (
         <div className='form_product'>
@@ -65,33 +95,41 @@ const Form = () => {
                 <label>Tên sản phẩm</label>
                 <input type="text" placeholder=''
                     name='title'
+                    value={title}
                     onChange={(ev) => setTitle(ev.target.value)}
                 />
                 <label>Mô tả sản phẩm</label>
                 <input type="area" placeholder=''
                     name='description'
+                    value={description}
                     onChange={(ev) => setDescription(ev.target.value)}
                 />
                 <label>Giá niêm yết</label>
                 <input type="number" placeholder=''
                     name='price'
+                    value={price}
                     onChange={(ev) => setPrice(ev.target.value)}
                 />
                 <label>Giá khuyến mại</label>
                 <input type="number" placeholder=''
                     name='pricePromo'
+                    value={pricePromo}
                     onChange={(ev) => setPricePromo(ev.target.value)}
                 />
                 <label>% khuyến mại</label>
                 <input type="number" placeholder=''
                     name='discount'
+                    value={discount}
                     onChange={(ev) => setDiscount(ev.target.value)}
                 />
                 <label>Danh mục</label>
-                <select name="category" id="" onChange={(ev) => setCategory(ev.target.value)}>
+                <select name="category" onChange={(ev) => setCategory(ev.target.value)}>
                     {categories && categories.map(item => (
                         <option
-                            key={item._id} value={item._id}>
+                            key={item._id}
+                            value={item._id}
+                        // selected={item._id === category}
+                        >
                             {item.title}
                         </option>
                     ))}

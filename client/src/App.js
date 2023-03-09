@@ -80,6 +80,7 @@ function App() {
                 <Route path='/dashboard/category/:id' element={<Form />} />
                 <Route path='/dashboard/product' element={<Product />} />
                 <Route path='/dashboard/product/add' element={<FormProduct />} />
+                <Route path='/dashboard/product/:id' element={<FormProduct />} />
               </Route>
               <Route path='*' element={<Page404 />} />
             </Route>
