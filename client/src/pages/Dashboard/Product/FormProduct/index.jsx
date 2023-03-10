@@ -79,7 +79,12 @@ const Form = () => {
 
         } else if (id === undefined) {
             axiosClient.post('/product/addproduct',
-                { title, description, price, pricePromo, discount, category, photos })
+                {
+                    title, slug: slugify(title, {
+                        replacement: '-',
+                        lower: true,
+                    }), description, price, pricePromo, discount, category, photos
+                })
                 .then(response => {
                     // const newCategoryList = [...category, response.data];
                     // setCategory(newCategoryList);
