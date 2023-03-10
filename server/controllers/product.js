@@ -4,6 +4,7 @@ import asyncHandler from 'express-async-handler'
 import ProductCategory from "../models/ProductCategory.js"
 
 
+const LIMIT_PAGE = 10
 const createProduct = asyncHandler(async (req, res) => {
     const { title, slug, description, photos, price, pricePromo, discount, category } = req.body
 
@@ -57,7 +58,7 @@ const getAllProduct = asyncHandler(async (req, res) => {
 
     // pagination 
     const page = +req.query.page || 1
-    const limit = +req.query.limit || process.env.LIMIT_PAGE
+    const limit = +req.query.limit || LIMIT_PAGE
     const skip = (page - 1) * limit
 
     queryCommand.skip(skip).limit(limit)
@@ -83,7 +84,7 @@ const getAllProduct = asyncHandler(async (req, res) => {
 const getProductsByCategory = asyncHandler(async (req, res) => {
 
     const page = +req.query.page || 1
-    const limit = +req.query.limit || process.env.LIMIT_PAGE
+    const limit = +req.query.limit || LIMIT_PAGE
     const skip = (page - 1) * limit
 
 

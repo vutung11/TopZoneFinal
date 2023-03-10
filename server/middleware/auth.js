@@ -1,9 +1,11 @@
 import jwt from 'jsonwebtoken'
 import UserModel from '../models/User.js'
 
+const JWT_SERECT = "Newhi"
+
 const auth = async (req, res, next) => {
     const token = req.header('Authorization').replace('Bearer ', '')
-    const data = jwt.verify(token, process.env.JWT_SERECT)
+    const data = jwt.verify(token, JWT_SERECT)
     try {
         const user = await UserModel.findOne({ id: data._id, 'tokens.token': token })
         if (!user) {

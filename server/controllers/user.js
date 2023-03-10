@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
 import asyncHandler from 'express-async-handler'
 
+const JWT_SERECT = "Newhi"
+
 const register = asyncHandler(async (req, res) => {
     const { firstName, mobile, lastName, email, password } = req.body
     const exitUser = await UserModel.findOne({ email, mobile }).exec()
@@ -89,7 +91,7 @@ const login = async (req, res) => {
             jwt.sign({
                 email: userDoc.email,
                 id: userDoc._id
-            }, process.env.JWT_SERECT, {}, (err, token) => {
+            }, JWT_SERECT, {}, (err, token) => {
                 if (err) throw err;
                 res.cookie('token', token, {
                     sameSite: 'none',
