@@ -74,4 +74,10 @@
     .container_store--location-box {
         width: 100%;
     }
+
+
+    .container_stote--title::before {
+        /* display: none; */
+        width: 100%;
+    }
 }

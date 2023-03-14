@@ -36,8 +36,8 @@
 
     .container_copyright--box {
         grid-template-columns: auto auto auto auto;
-        column-gap: 3px;
-        row-gap: 10px;
+        column-gap: 1px;
+        row-gap: 3px;
     }
 
     .container_copyright--box img {
