@@ -50,10 +50,11 @@ const ListingProduct = (props) => {
           </NavLink>
         ))
           : <p>Loading ...</p>}
-        <div className='box_learn_more'>
-          <button className='learn_more' onClick={handleLoad}>Xem thêm</button>
-        </div>
 
+
+      </div>
+      <div className='box_learn_more'>
+        <button className='learn_more' onClick={handleLoad}>Xem thêm</button>
       </div>
     </div >
   )
