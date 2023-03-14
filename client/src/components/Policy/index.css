@@ -28,3 +28,9 @@
 .anticon-right-circle {
     font-size: 35px;
 }
+
+@media(max-width:391px) {
+    .container_policy {
+        display: none;
+    }
+}

@@ -18,27 +18,27 @@ const ProductCard = (props) => {
     <div className='container_productcard'>
       <h2 className='container_productcard-title'>{header}</h2>
       <div className="container_productcard--wrap">
-        <Carousel
+        {/* <Carousel
           arrows={true}
           slidesToShow={4}
           prevArrow={<LeftOutlined />}
           nextArrow={<RightOutlined />}
-        >
-          {data ? data?.map((item) => (
-            <NavLink to={`/${categorySlug}/${item.slug}`} key={item._id}>
-              <div className="container_productcard--box">
-                <label className='label'>Mới</label>
-                <img src={item.photos[0]} alt="" />
-                <div className="container_product--box-content">
-                  <h3>{item.title}</h3>
-                  <span>{item.price}đ<strike>{item.pricePromo}₫ </strike><small>{item.discount}%</small></span>
-                </div>
+        > */}
+        {data ? data?.map((item) => (
+          <NavLink to={`/${categorySlug}/${item.slug}`} key={item._id}>
+            <div className="container_productcard--box">
+              <label className='label'>Mới</label>
+              <img src={item.photos[0]} alt="" />
+              <div className="container_product--box-content">
+                <h3>{item.title}</h3>
+                <span>{item.price}đ<strike>{item.pricePromo}₫ </strike><small>{item.discount}%</small></span>
               </div>
-            </NavLink>
-          ))
-            : <p>Loading ...</p>}
+            </div>
+          </NavLink>
+        ))
+          : <p>Loading ...</p>}
 
-        </Carousel>
+        {/* </Carousel> */}
       </div>
     </div >
   )

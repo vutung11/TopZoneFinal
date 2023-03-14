@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import { Form } from 'antd';
 import { Input } from 'antd';
-import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
 
 
 import './index.css';
@@ -13,13 +13,18 @@ import { UserContext } from '../../pages/UserContext';
 const Header = () => {
     const { Search } = Input;
     const { user } = useContext(UserContext);
+    const [isMenu, setIsMenu] = useState(false);
+    const handleMenu = () => {
+        setIsMenu(!isMenu)
+    }
 
     return (
         <div className='container_header'>
+            <MenuOutlined className='icon-menu' onClick={handleMenu} />
             <Link to={'/'}>
                 <img src='https://cdn.tgdd.vn/mwgcart/topzone/images/mobile/logo-video.png?v=4' className='container_header--logo' alt="" />
             </Link>
-            <ul className='container_header--menu'>
+            <ul className={`container_header--menu ${isMenu ? 'hidden' : ''}`}>
 
                 <NavLink className={(navData) => navData.isActive ? 'active' : ''} to={'/iphone'}>
                     <div className='item_menu'>
@@ -68,9 +73,7 @@ const Header = () => {
                     </div>
                 </NavLink>
 
-                <Form>
-                    <Search className='input_search' placeholder="Tìm kiếm sản phẩm" enterButton />
-                </Form>
+
                 {/* <NavLink className={(navData) => navData.isActive ? 'active' : ''} to={'/login'}>
                     <div className='item_menu'>
                         Login
@@ -86,9 +89,10 @@ const Header = () => {
                     </div>
                 </Link>
             )}
-
-
-            <ShoppingCartOutlined />
+            {/* <Form>
+                <Search className='input_search' placeholder="Tìm kiếm sản phẩm" enterButton />
+            </Form>
+            <ShoppingCartOutlined /> */}
 
         </div>
 

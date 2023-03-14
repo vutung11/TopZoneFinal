@@ -57,13 +57,13 @@
 
  }
 
- .container_product--box-content span {
+ /* .container_product--box-content span {
      font-size: 18px;
      display: flex;
      flex-direction: row;
      gap: 4px;
      justify-content: center;
- }
+ } */
 
  .container_product--box-content strike,
  .container_product--box-content small {
