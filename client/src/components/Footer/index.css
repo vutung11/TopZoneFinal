@@ -22,7 +22,8 @@
 }
 
 .container_footer--content {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
     gap: 10px;
 }
 
@@ -45,4 +46,15 @@
 .container_footer--content-box span {
     color: #2997ff;
     font-weight: 400;
+}
+
+@media(max-width:391px) {
+    .container_footer {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .container_footer--content {
+        grid-template-columns: auto;
+    }
 }

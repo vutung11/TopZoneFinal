@@ -15,8 +15,9 @@
 }
 
 .container_copyright--box {
-    display: flex;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    column-gap: 15px;
 }
 
 .container_copyright--box img {
@@ -25,4 +26,21 @@
     background-size: cover;
     object-fit: cover;
     cursor: pointer;
+}
+
+@media (max-width: 391px) {
+    .container_copyright {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .container_copyright--box {
+        grid-template-columns: auto auto auto auto;
+        column-gap: 3px;
+        row-gap: 10px;
+    }
+
+    .container_copyright--box img {
+        width: 90px;
+    }
 }

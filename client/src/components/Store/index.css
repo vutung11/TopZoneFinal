@@ -61,3 +61,17 @@
 .container_store--location-box-address {
     margin: 0px;
 }
+
+@media (max-width:391px) {
+    .container_store--bg {
+        padding: 0;
+    }
+
+    .container_store {
+        width: 100%;
+    }
+
+    .container_store--location-box {
+        width: 100%;
+    }
+}
