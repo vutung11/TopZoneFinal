@@ -81,3 +81,23 @@
         width: 100%;
     }
 }
+
+@media (max-width:821px) {
+    .container_store--bg {
+        padding: 0;
+    }
+
+    .container_store {
+        width: 100%;
+    }
+
+    .container_store--location-box {
+        width: 100%;
+    }
+
+
+    .container_stote--title::before {
+        /* display: none; */
+        width: 100%;
+    }
+}

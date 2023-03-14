@@ -46,3 +46,23 @@
         background-size: cover;
     }
 }
+
+@media (max-width: 821px) {
+    .container_copyright {
+        width: 100%;
+        padding: 10px;
+
+    }
+
+    .container_copyright--box {
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 10px;
+        row-gap: 10px;
+    }
+
+    .container_copyright--box img {
+        width: 100%;
+        object-fit: cover;
+        background-size: cover;
+    }
+}

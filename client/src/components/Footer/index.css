@@ -58,3 +58,14 @@
         grid-template-columns: auto;
     }
 }
+
+@media(max-width:821px) {
+    .container_footer {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .container_footer--content {
+        grid-template-columns: auto auto;
+    }
+}
